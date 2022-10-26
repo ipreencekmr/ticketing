@@ -1,19 +1,19 @@
-name: deploy-auth
+name: deploy-client
 
 on:
   push:
     branches:
       - master
     paths:
-      - "auth/**"
+      - "t-client/**"
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd auth && docker build -t ipreencekmr/auth .
+      - run: cd auth && docker build -t ipreencekmr/t-client .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker push ipreencekmr/auth
+      - run: docker push ipreencekmr/t-client

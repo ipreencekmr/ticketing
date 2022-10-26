@@ -1,19 +1,19 @@
-name: deploy-auth
+name: deploy-payments
 
 on:
   push:
     branches:
       - master
     paths:
-      - "auth/**"
+      - "payments/**"
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd auth && docker build -t ipreencekmr/auth .
+      - run: cd payments && docker build -t ipreencekmr/payments .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker push ipreencekmr/auth
+      - run: docker push ipreencekmr/payments
